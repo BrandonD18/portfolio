@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandon Duque | AI Automation Specialist</title>
+  <meta name="description" content="AI automation systems for businesses. 18 n8n workflows, 12 Python services, commercial products. Media buying background. Let's build something." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy-900: #0f172a;
+      --navy-800: #1e293b;
+      --navy-700: #334155;
+      --navy-600: #475569;
+      --navy-500: #64748b;
+      --navy-400: #94a3b8;
+      --navy-300: #cbd5e1;
+      --navy-200: #e2e8f0;
+      --navy-100: #f1f5f9;
+      --navy-50: #f8fafc;
+      --cyan: #06b6d4;
+      --cyan-dark: #0891b2;
+      --white: #ffffff;
+      --success: #10b981;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--navy-900);
+      color: var(--navy-200);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+    .hero-label {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .hero h1 span { color: var(--cyan); }
+    .hero p {
+      font-size: 18px;
+      color: var(--navy-400);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 40px;
+    }
+    .stat { text-align: center; }
+    .stat-number {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--navy-500);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* Section */
+    .section { padding: 60px 0; }
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .section-sub {
+      font-size: 16px;
+      color: var(--navy-400);
+      margin-bottom: 40px;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .skill-card {
+      background: var(--navy-800);
+      border: 1px solid var(--navy-700);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .skill-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .skill-card p {
+      font-size: 14px;
+      color: var(--navy-400);
+      line-height: 1.5;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .project-card {
+      background: var(--navy-800);
+      border: 1px solid var(--navy-700);
+      border-radius: 12px;
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .project-card:hover { border-color: var(--cyan); }
+    .project-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--cyan);
+      background: rgba(6, 182, 212, 0.1);
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .project-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .project-card p {
+      font-size: 14px;
+      color: var(--navy-400);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .project-tech span {
+      font-size: 12px;
+      color: var(--navy-400);
+      background: var(--navy-700);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* Product */
+    .product-card {
+      background: linear-gradient(135deg, var(--navy-800), var(--navy-700));
+      border: 1px solid var(--cyan);
+      border-radius: 16px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .product-info { flex: 1; }
+    .product-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy-900);
+      background: var(--cyan);
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .product-info h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .product-info p {
+      font-size: 15px;
+      color: var(--navy-300);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .product-price {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .product-price span {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--navy-400);
+    }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--navy-700);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -29px;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--cyan);
+      border: 2px solid var(--navy-900);
+    }
+    .timeline-date {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--cyan);
+      margin-bottom: 4px;
+    }
+    .timeline-item h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .timeline-item p {
+      font-size: 14px;
+      color: var(--navy-400);
+      line-height: 1.5;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 80px 0;
+    }
+    .cta h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .cta p {
+      font-size: 16px;
+      color: var(--navy-400);
+      margin-bottom: 32px;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--cyan);
+      color: var(--navy-900);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .cta-btn:hover { background: var(--cyan-dark); }
+    .cta-email {
+      display: block;
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--navy-500);
+    }
+    .cta-email a { color: var(--navy-400); text-decoration: none; }
+    .cta-email a:hover { color: var(--cyan); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--navy-800);
+      padding: 24px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--navy-600);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 32px; }
+      .hero-stats { flex-direction: column; gap: 24px; }
+      .stat-number { font-size: 28px; }
+      .product-card { flex-direction: column; text-align: center; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-label">AI Automation Specialist</div>
+      <h1>Brandon <span>Duque</span></h1>
+      <p>Building AI automation systems for businesses. 7 years in media buying, 8 months building automations that actually generate revenue.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number">18</div>
+          <div class="stat-label">n8n Workflows</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Python Services</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">7</div>
+          <div class="stat-label">Years Media Buying</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Technical Stack</h2>
+      <p class="section-sub">What I work with daily.</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Automation</h3>
+          <p>n8n, Make, Zapier, custom Python workflows, API integrations</p>
+        </div>
+        <div class="skill-card">
+          <h3>Backend</h3>
+          <p>Python, FastAPI, Flask, Docker, PostgreSQL, SQLite</p>
+        </div>
+        <div class="skill-card">
+          <h3>AI/ML</h3>
+          <p>Ollama (local LLMs), prompt engineering, agentic workflows, voice agents</p>
+        </div>
+        <div class="skill-card">
+          <h3>Lead Gen</h3>
+          <p>Google Maps scraping, LinkedIn outreach, lead enrichment, qualification scoring</p>
+        </div>
+        <div class="skill-card">
+          <h3>Advertising</h3>
+          <p>Google Ads, Meta Ads, landing pages, conversion tracking, funnel optimization</p>
+        </div>
+        <div class="skill-card">
+          <h3>CRM</h3>
+          <p>GoHighLevel (in progress), custom CRM development, pipeline automation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Commercial Product</h2>
+      <p class="section-sub">A product I built, priced, and sell.</p>
+      <div class="product-card">
+        <div class="product-info">
+          <div class="product-badge">Live Product</div>
+          <h3>AI Inbox Copilot</h3>
+          <p>Customer support automation that handles inquiries, qualifies leads, and books meetings. Runs on local LLMs, no API fees. Embeddable widget for any website.</p>
+          <div class="product-price">$2,350 <span>one-time</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">What I've Built</h2>
+      <p class="section-sub">Production systems, not tutorials.</p>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-tag">Sales</div>
+          <h3>Sales Copilot</h3>
+          <p>Real-time AI assist for sales teams. Talk tracks, objection handlers, lead insights. Webhook-driven, connects to any CRM.</p>
+          <div class="project-tech">
+            <span>n8n</span>
+            <span>Ollama</span>
+            <span>FastAPI</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-tag">Lead Gen</div>
+          <h3>Lead Follow-Up Engine</h3>
+          <p>Multi-touch email nurture campaigns. AI-generated content, optimal timing, stop-on-reply logic. Handles 100+ leads simultaneously.</p>
+          <div class="project-tech">
+            <span>Python</span>
+            <span>Ollama</span>
+            <span>SMTP</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-tag">Support</div>
+          <h3>Support Bot</h3>
+          <p>Ticket intake, AI draft replies, human handoff at confidence threshold. Cuts response times by 80%.</p>
+          <div class="project-tech">
+            <span>FastAPI</span>
+            <span>Ollama</span>
+            <span>SQLite</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-tag">Content</div>
+          <h3>Content Repurposer</h3>
+          <p>Paste once, get platform-optimized versions for LinkedIn, Twitter, newsletter, blog, and Instagram. One source, five outputs.</p>
+          <div class="project-tech">
+            <span>n8n</span>
+            <span>Ollama</span>
+            <span>FastAPI</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-tag">Operations</div>
+          <h3>Invoice Processor</h3>
+          <p>AI document extraction. Invoices in, structured data out. Line items, totals, vendor info, due dates. Routes to accounting systems.</p>
+          <div class="project-tech">
+            <span>Python</span>
+            <span>Ollama</span>
+            <span>FastAPI</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-tag">Voice</div>
+          <h3>AI Voice Agent</h3>
+          <p>Outbound calling with natural speech. Qualifies leads, books appointments. Text-to-speech with edge-tts.</p>
+          <div class="project-tech">
+            <span>Python</span>
+            <span>edge-tts</span>
+            <span>Ollama</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-tag">Data</div>
+          <h3>Internal Reporting</h3>
+          <p>Connect any data source, describe the report in plain English, get formatted insights with charts and recommendations.</p>
+          <div class="project-tech">
+            <span>FastAPI</span>
+            <span>Ollama</span>
+            <span>SQLite</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-tag">Lead Gen</div>
+          <h3>DB Reactivation</h3>
+          <p>Import cold lead CSVs, score by re-engagement potential, run AI win-back campaigns. Turn dead leads into revenue.</p>
+          <div class="project-tech">
+            <span>n8n</span>
+            <span>Ollama</span>
+            <span>Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Background</h2>
+      <p class="section-sub">Where I come from and where I'm going.</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2024 - Present</div>
+          <h3>AI Automation Specialist</h3>
+          <p>Building and selling custom AI automation systems. 18 n8n workflows, 12 Python services, commercial product. Client projects for lead gen and business process automation. Simultaneously running media buying operations.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2019 - Present</div>
+          <h3>Media Buyer</h3>
+          <p>7 years in digital advertising. Managed paid campaigns across Google Ads and Meta. Built lead generation funnels, optimized conversion tracking, handled client relationships. Still actively buying media while building automation systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>Let's build something</h2>
+      <p>I'm looking for automation challenges to solve. Give me a real problem and I'll deliver a working solution.</p>
+      <a href="mailto:Brandon.aiagency@gmail.com" class="cta-btn">Get in touch</a>
+      <div class="cta-email">or email <a href="mailto:Brandon.aiagency@gmail.com">Brandon.aiagency@gmail.com</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">&copy; 2026 Brandon Duque. Built with AI and caffeine.</div>
+  </footer>
+
+</body>
+</html>
