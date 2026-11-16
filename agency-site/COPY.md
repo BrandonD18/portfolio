@@ -1,7 +1,7 @@
 # COPY.md
 
 Every word on the site comes from this file. Facts come from CONTEXT.md.
-`[AGENCY NAME]` is a placeholder until the name is chosen.
+The agency name is BDDigital. It is set once in build.mjs.
 
 Search terms worked in: Meta ads agency, AI automation agency, high-ticket lead
 generation.
@@ -12,16 +12,16 @@ Shared across all pages:
 - **Menu button:** Start an enquiry
 - **Phone menu button:** Menu
 - **Keyboard shortcut link:** Skip to content
-- **Footer line:** [AGENCY NAME]. Meta ads and AI automation for high-ticket businesses.
+- **Footer line:** BDDigital. Meta ads and AI automation for high-ticket businesses.
 - **Footer links:** Home · Services · Work · Contact
 - **Footer email:** Brandon.aiagency@gmail.com
-- **Footer small print:** © 2026 [AGENCY NAME]. Run by Brandon Duque.
+- **Footer small print:** © 2026 BDDigital. Run by Brandon Duque.
 
 ---
 
 ## Page 1: Home
 
-**Page title:** [AGENCY NAME] | Meta Ads Agency and AI Automation for High-Ticket Businesses
+**Page title:** BDDigital | Meta Ads Agency and AI Automation for High-Ticket Businesses
 
 **Meta description:** A Meta ads agency and AI automation agency for high-ticket businesses. We run your Facebook and Instagram ads, then automate the follow-up so every lead gets an answer.
 
@@ -31,7 +31,7 @@ Shared across all pages:
 
 **Headline (H1):** Meta ads that bring in leads. Automation that follows them up.
 
-**Opening line:** [AGENCY NAME] is a Meta ads agency and AI automation agency for high-ticket businesses. We run your Facebook and Instagram campaigns, then install the systems that reply to, qualify and book the leads they bring in.
+**Opening line:** BDDigital is a Meta ads agency and AI automation agency for high-ticket businesses. We run your Facebook and Instagram campaigns, then install the systems that reply to, qualify and book the leads they bring in.
 
 **Button:** Start an enquiry
 
@@ -85,7 +85,7 @@ When one sale is worth thousands, a lead that goes unanswered is expensive. We b
 
 **Heading (H2):** Who runs it
 
-**Text:** [AGENCY NAME] is run by Brandon Duque. Brandon has spent 7 years in media buying, managing paid campaigns across Meta and Google Ads, building lead generation funnels and optimising conversion tracking. Since 2024 he has also built AI automation systems: 18 n8n workflows, 12 Python services and one commercial product. He still buys media every day.
+**Text:** BDDigital is run by Brandon Duque. Brandon has spent 7 years in media buying, managing paid campaigns across Meta and Google Ads, building lead generation funnels and optimising conversion tracking. Since 2024 he has also built AI automation systems: 18 n8n workflows, 12 Python services and one commercial product. He still buys media every day.
 
 ### Closing
 
@@ -99,7 +99,7 @@ When one sale is worth thousands, a lead that goes unanswered is expensive. We b
 
 ## Page 2: Services
 
-**Page title:** Meta Ads Management and AI Automation Services | [AGENCY NAME]
+**Page title:** Meta Ads Management and AI Automation Services | BDDigital
 
 **Meta description:** Done-for-you Meta ads management, AI lead follow-up automation and plain-English reporting for high-ticket businesses. See exactly what you get.
 
@@ -174,7 +174,7 @@ No. We work with high-ticket businesses in any industry.
 
 ## Page 3: Work
 
-**Page title:** AI Automation Systems We've Built | [AGENCY NAME]
+**Page title:** AI Automation Systems We've Built | BDDigital
 
 **Meta description:** AI automation systems built and running: lead follow-up, sales assist, support, voice agents, reporting and more, plus our live product, AI Inbox Copilot.
 
@@ -221,7 +221,7 @@ No. We work with high-ticket businesses in any industry.
 
 ## Page 4: Contact
 
-**Page title:** Start an Enquiry | [AGENCY NAME]
+**Page title:** Start an Enquiry | BDDigital
 
 **Meta description:** Tell us about your business and what you need: Meta ads, AI automation, or both. Brandon reads every enquiry.
 

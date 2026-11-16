@@ -5,7 +5,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const NAME = '[AGENCY NAME]';
+const NAME = 'BDDigital';
 const SITE_URL = '';            // e.g. https://www.example.com (no trailing slash). Empty until the site is live.
 const EMAIL = 'Brandon.aiagency@gmail.com';
 const OUT = join(dirname(fileURLToPath(import.meta.url)), 'site');
