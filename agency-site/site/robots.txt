@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://bddigital-phi.vercel.app/sitemap.xml
