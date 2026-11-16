@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Start an Enquiry | [AGENCY NAME]</title>
+<meta name="description" content="Tell us about your business and what you need: Meta ads, AI automation, or both. Brandon reads every enquiry." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="[AGENCY NAME]" />
+<meta property="og:title" content="Start an Enquiry | [AGENCY NAME]" />
+<meta property="og:description" content="Tell us about your business and what you need: Meta ads, AI automation, or both. Brandon reads every enquiry." />
+<meta name="twitter:card" content="summary" />
+<meta name="theme-color" content="#070B1F" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/assets/site.css" />
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="/">[AGENCY NAME]</a>
+    <button class="menu-btn label" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav class="nav" id="menu" aria-label="Main">
+        <a class="label" href="/">Home</a>
+        <a class="label" href="/services/">Services</a>
+        <a class="label" href="/work/">Work</a>
+        <a class="label" href="/contact/" aria-current="page">Contact</a>
+        <a class="btn small" href="/contact/">Start an enquiry</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<div class="hero">
+  <canvas data-mode="still" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="label">Contact</p>
+    <h1>Tell us about your business</h1>
+    <p class="lede">A few details are enough to start. Brandon reads every enquiry and replies by email.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <form data-enquiry data-to="Brandon.aiagency@gmail.com" action="mailto:Brandon.aiagency@gmail.com" method="post" enctype="text/plain" novalidate>
+      <div class="field">
+        <label for="f-name">Your name <span class="req">(required)</span></label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required />
+        <p class="err">Please enter your name.</p>
+      </div>
+      <div class="field">
+        <label for="f-email">Email <span class="req">(required)</span></label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required />
+        <p class="err">Please enter a valid email address.</p>
+      </div>
+      <div class="field">
+        <label for="f-business">Business name <span class="req">(required)</span></label>
+        <input id="f-business" name="business" type="text" autocomplete="organization" required />
+        <p class="err">Please enter your business name.</p>
+      </div>
+      <div class="field">
+        <label for="f-website">Website</label>
+        <input id="f-website" name="website" type="text" inputmode="url" autocomplete="url" />
+      </div>
+      <div class="field">
+        <label for="f-budget">Monthly ad budget</label>
+        <select id="f-budget" name="budget">
+          <option>Not running ads yet</option>
+          <option>Under $3,000</option>
+          <option>$3,000 to $10,000</option>
+          <option>$10,000 to $30,000</option>
+          <option>Over $30,000</option>
+        </select>
+      </div>
+      <fieldset class="field">
+        <legend>What do you need?</legend>
+        <div class="choices">
+          <label><input type="radio" name="need" value="Meta ads" /><span>Meta ads</span></label>
+          <label><input type="radio" name="need" value="AI automation" /><span>AI automation</span></label>
+          <label><input type="radio" name="need" value="Both" checked /><span>Both</span></label>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label for="f-message">Tell us more</label>
+        <p class="help" id="f-message-help">What do you sell, and what is one sale worth to you?</p>
+        <textarea id="f-message" name="message" aria-describedby="f-message-help"></textarea>
+      </div>
+      <div><button class="btn" type="submit">Send enquiry</button></div>
+      <p class="sent" tabindex="-1" role="status">Thanks. Your email app has opened with your enquiry filled in. Press send there and Brandon will reply by email.</p>
+    </form>
+    <p class="under">Prefer email? Write to <a href="mailto:Brandon.aiagency@gmail.com">Brandon.aiagency@gmail.com</a></p>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <a class="brand" href="/">[AGENCY NAME]</a>
+        <p>[AGENCY NAME]. Meta ads and AI automation for high-ticket businesses.</p>
+      </div>
+      <div>
+        <nav aria-label="Footer">
+          <a class="label" href="/">Home</a>
+          <a class="label" href="/services/">Services</a>
+          <a class="label" href="/work/">Work</a>
+          <a class="label" href="/contact/">Contact</a>
+        </nav>
+        <a class="mail" href="mailto:Brandon.aiagency@gmail.com">Brandon.aiagency@gmail.com</a>
+      </div>
+    </div>
+    <p class="small">© 2026 [AGENCY NAME]. Run by Brandon Duque.</p>
+  </div>
+</footer>
+</body>
+</html>

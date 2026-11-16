@@ -10,6 +10,8 @@ Shared across all pages:
 
 - **Menu:** Home · Services · Work · Contact
 - **Menu button:** Start an enquiry
+- **Phone menu button:** Menu
+- **Keyboard shortcut link:** Skip to content
 - **Footer line:** [AGENCY NAME]. Meta ads and AI automation for high-ticket businesses.
 - **Footer links:** Home · Services · Work · Contact
 - **Footer email:** Brandon.aiagency@gmail.com
@@ -242,6 +244,8 @@ No. We work with high-ticket businesses in any industry.
 - **Tell us more** (message box). Helper text: What do you sell, and what is one sale worth to you?
 - **Button:** Send enquiry
 
-**After sending:** Thanks. Your enquiry is on its way, and Brandon will reply by email.
+**Error messages:** Please enter your name. · Please enter a valid email address. · Please enter your business name.
+
+**After sending:** Thanks. Your email app has opened with your enquiry filled in. Press send there and Brandon will reply by email.
 
 **Under the form:** Prefer email? Write to Brandon.aiagency@gmail.com
