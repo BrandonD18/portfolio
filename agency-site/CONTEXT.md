@@ -33,11 +33,13 @@ this file, it does not go on the site.
 
 ### Track record
 
-- 7 years in media buying (2019 to present). Managed paid campaigns across
-  Google Ads and Meta. Built lead generation funnels, optimised conversion
-  tracking, handled client relationships. Still actively buying media.
-- AI automation specialist since 2024. 18 n8n workflows and 12 Python services
-  built. Client projects for lead generation and business process automation.
+- 7 years buying media for his own e-commerce (dropshipping) stores, 2019 to
+  present. Ran paid campaigns across Google Ads and Meta and optimised
+  conversion tracking. This was not client work.
+- Building AI automation systems since 2024. 18 n8n workflows and 12 Python
+  services built.
+- No paying clients yet. Do not state or imply past client work, client
+  results or product sales anywhere on the site.
 
 ### Live product
 
@@ -50,10 +52,9 @@ this file, it does not go on the site.
 - **Sales Copilot**: real-time AI assist for sales teams. Talk tracks,
   objection handlers, lead insights. Webhook-driven, connects to any CRM.
 - **Lead Follow-Up Engine**: multi-touch email nurture campaigns with
-  AI-generated content, optimal timing and stop-on-reply logic. Handles 100+
-  leads simultaneously.
+  AI-generated content, optimal timing and stop-on-reply logic.
 - **Support Bot**: ticket intake, AI draft replies, human handoff at a
-  confidence threshold. Cuts response times by 80%.
+  confidence threshold.
 - **Content Repurposer**: paste once, get versions for LinkedIn, Twitter,
   newsletter, blog and Instagram.
 - **Invoice Processor**: AI document extraction. Line items, totals, vendor

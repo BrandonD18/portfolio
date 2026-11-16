@@ -162,7 +162,7 @@ const home = page({
   <div class="wrap">
     <div class="head rise">
       <h2>Production systems, not tutorials</h2>
-      <p>We sell a live product and have built working automation for sales, support, lead generation and operations.</p>
+      <p>We have built a live product and working automation for sales, support, lead generation and operations.</p>
     </div>
     <div class="feature rise">
       <h3>AI Inbox Copilot</h3>
@@ -176,7 +176,7 @@ const home = page({
   <div class="wrap split rise">
     <h2>Who runs it</h2>
     <div class="body">
-      <p class="big">${NAME} is run by Brandon Duque. Brandon has spent 7 years in media buying, managing paid campaigns across Meta and Google Ads, building lead generation funnels and optimising conversion tracking. Since 2024 he has also built AI automation systems: 18 n8n workflows, 12 Python services and one commercial product. He still buys media every day.</p>
+      <p class="big">${NAME} is run by Brandon Duque. Brandon has spent 7 years buying media for his own e-commerce stores, running paid campaigns across Meta and Google Ads and optimising conversion tracking. Since 2024 he has also built AI automation systems: 18 n8n workflows, 12 Python services and one commercial product. He still buys media every day.</p>
     </div>
   </div>
 </section>
@@ -259,8 +259,8 @@ ${closing('Ready to see what this looks like for your business?')}`,
 /* ---------- Page 3: Work ---------- */
 const systems = [
   ['Sales', 'Sales Copilot', 'Real-time AI assist for sales teams. Talk tracks, objection handlers and lead insights. Webhook-driven, connects to any CRM.'],
-  ['Lead generation', 'Lead Follow-Up Engine', 'Multi-touch email nurture campaigns with AI-generated content, optimal timing and stop-on-reply logic. Handles 100+ leads simultaneously.'],
-  ['Support', 'Support Bot', 'Ticket intake, AI draft replies and human handoff at a confidence threshold. Cuts response times by 80%.'],
+  ['Lead generation', 'Lead Follow-Up Engine', 'Multi-touch email nurture campaigns with AI-generated content, optimal timing and stop-on-reply logic.'],
+  ['Support', 'Support Bot', 'Ticket intake, AI draft replies and human handoff at a confidence threshold.'],
   ['Content', 'Content Repurposer', 'Paste once, get platform-ready versions for LinkedIn, Twitter, newsletter, blog and Instagram.'],
   ['Operations', 'Invoice Processor', 'AI document extraction. Line items, totals, vendor info and due dates, routed to accounting systems.'],
   ['Voice', 'AI Voice Agent', 'Outbound calling with natural speech. Qualifies leads and books appointments.'],
@@ -270,7 +270,7 @@ const systems = [
 const work = page({
   path: '/work/',
   title: `AI Automation Systems We've Built | ${NAME}`,
-  description: 'AI automation systems built and running: lead follow-up, sales assist, support, voice agents, reporting and more, plus our live product, AI Inbox Copilot.',
+  description: 'AI automation systems built and working: lead follow-up, sales assist, support, voice agents, reporting and more, plus our live product, AI Inbox Copilot.',
   body: `${innerHero('Work', "AI automation systems we've built", 'Production systems, not tutorials. This is what an AI automation agency should be able to show you: working software, built with n8n, Python and local LLMs.')}
 
 <section>

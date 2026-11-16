@@ -75,7 +75,7 @@ When one sale is worth thousands, a lead that goes unanswered is expensive. We b
 
 **Heading (H2):** Production systems, not tutorials
 
-**Text:** We sell a live product and have built working automation for sales, support, lead generation and operations.
+**Text:** We have built a live product and working automation for sales, support, lead generation and operations.
 
 **Featured:** AI Inbox Copilot. Customer support automation that handles enquiries, qualifies leads and books meetings.
 
@@ -85,7 +85,7 @@ When one sale is worth thousands, a lead that goes unanswered is expensive. We b
 
 **Heading (H2):** Who runs it
 
-**Text:** BDdigital is run by Brandon Duque. Brandon has spent 7 years in media buying, managing paid campaigns across Meta and Google Ads, building lead generation funnels and optimising conversion tracking. Since 2024 he has also built AI automation systems: 18 n8n workflows, 12 Python services and one commercial product. He still buys media every day.
+**Text:** BDdigital is run by Brandon Duque. Brandon has spent 7 years buying media for his own e-commerce stores, running paid campaigns across Meta and Google Ads and optimising conversion tracking. Since 2024 he has also built AI automation systems: 18 n8n workflows, 12 Python services and one commercial product. He still buys media every day.
 
 ### Closing
 
@@ -176,7 +176,7 @@ No. We work with high-ticket businesses in any industry.
 
 **Page title:** AI Automation Systems We've Built | BDdigital
 
-**Meta description:** AI automation systems built and running: lead follow-up, sales assist, support, voice agents, reporting and more, plus our live product, AI Inbox Copilot.
+**Meta description:** AI automation systems built and working: lead follow-up, sales assist, support, voice agents, reporting and more, plus our live product, AI Inbox Copilot.
 
 ### Hero
 
@@ -203,8 +203,8 @@ No. We work with high-ticket businesses in any industry.
 | Area | Name | What it does |
 |---|---|---|
 | Sales | Sales Copilot | Real-time AI assist for sales teams. Talk tracks, objection handlers and lead insights. Webhook-driven, connects to any CRM. |
-| Lead generation | Lead Follow-Up Engine | Multi-touch email nurture campaigns with AI-generated content, optimal timing and stop-on-reply logic. Handles 100+ leads simultaneously. |
-| Support | Support Bot | Ticket intake, AI draft replies and human handoff at a confidence threshold. Cuts response times by 80%. |
+| Lead generation | Lead Follow-Up Engine | Multi-touch email nurture campaigns with AI-generated content, optimal timing and stop-on-reply logic. |
+| Support | Support Bot | Ticket intake, AI draft replies and human handoff at a confidence threshold. |
 | Content | Content Repurposer | Paste once, get platform-ready versions for LinkedIn, Twitter, newsletter, blog and Instagram. |
 | Operations | Invoice Processor | AI document extraction. Line items, totals, vendor info and due dates, routed to accounting systems. |
 | Voice | AI Voice Agent | Outbound calling with natural speech. Qualifies leads and books appointments. |
