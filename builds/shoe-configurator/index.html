@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stride One | Build your running shoe</title>
+<style>
+  :root {
+    --ink: #15171a; --muted: #6b7078; --line: #e4e6ea; --panel: #ffffff;
+    --accent: #15171a; --bg1: #f4f5f7; --bg2: #dfe2e7;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink); background: var(--bg1);
+    display: grid; grid-template-columns: 1fr 380px; overflow: hidden;
+  }
+  #stage { position: relative; min-width: 0; min-height: 0;
+    background: radial-gradient(ellipse at 50% 35%, #ffffff 0%, var(--bg1) 45%, var(--bg2) 100%); }
+  #stage canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  #stage canvas:active { cursor: grabbing; }
+  .brand { position: absolute; top: 22px; left: 26px; font-weight: 700; letter-spacing: .14em; font-size: 13px; }
+  .hint { position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; font-size: 12px; color: var(--muted); pointer-events: none; }
+  .bag { position: absolute; top: 14px; right: 18px; display: flex; align-items: center; gap: 8px;
+    background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 600; }
+  .bag svg { width: 18px; height: 18px; }
+  .bag .count { min-width: 20px; height: 20px; border-radius: 10px; background: var(--ink); color: #fff;
+    display: grid; place-items: center; font-size: 11px; padding: 0 6px; transition: transform .25s ease; }
+  .bag.bump .count { transform: scale(1.45); }
+  #fallback { position: absolute; inset: 0; display: none; place-items: center; padding: 30px; text-align: center; color: var(--muted); }
+
+  aside { background: var(--panel); border-left: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; }
+  .scroll { overflow-y: auto; padding: 26px 26px 10px; flex: 1; }
+  h1 { font-size: 24px; margin: 0 0 4px; letter-spacing: -.01em; }
+  .sub { color: var(--muted); font-size: 13px; margin: 0 0 22px; }
+  fieldset { border: 0; padding: 0; margin: 0 0 22px; }
+  legend { padding: 0; margin-bottom: 10px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    display: flex; justify-content: space-between; width: 100%; }
+  legend span { font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--muted); }
+  .swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+  .swatch { width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(0,0,0,.18); cursor: pointer; padding: 0;
+    outline: 2px solid transparent; outline-offset: 3px; transition: outline-color .15s, transform .15s; }
+  .swatch:hover { transform: scale(1.07); }
+  .swatch[aria-pressed="true"] { outline-color: var(--ink); }
+  .seg { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .seg button { border: 1px solid var(--line); background: #fff; border-radius: 12px; padding: 12px; text-align: left; cursor: pointer;
+    font: inherit; color: inherit; transition: border-color .15s, background .15s; }
+  .seg button b { display: block; font-size: 14px; }
+  .seg button small { color: var(--muted); font-size: 12px; }
+  .seg button[aria-pressed="true"] { border-color: var(--ink); background: #f6f7f8; box-shadow: inset 0 0 0 1px var(--ink); }
+  input[type=text] { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 16px;
+    letter-spacing: .2em; text-transform: uppercase; }
+  input[type=text]:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+  input[type=text]::placeholder { letter-spacing: 0; text-transform: none; color: #a4a8ae; }
+  .toggle { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .summary { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+  .summary div { display: flex; justify-content: space-between; padding: 3px 0; }
+  .buy { border-top: 1px solid var(--line); padding: 16px 26px 22px; }
+  .price-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+  .price-row span { font-size: 13px; color: var(--muted); }
+  #price { font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  #add { width: 100%; border: 0; border-radius: 14px; background: var(--accent); color: #fff; font: inherit; font-weight: 600; font-size: 16px;
+    padding: 16px; cursor: pointer; transition: transform .12s, background .2s; }
+  #add:hover { background: #2b2f35; }
+  #add:active { transform: scale(.98); }
+  #add.done { background: #1f7a4d; }
+
+  @media (max-width: 820px) {
+    body { grid-template-columns: 1fr; grid-template-rows: 46vh 1fr; }
+    aside { border-left: 0; border-top: 1px solid var(--line); }
+    .scroll { padding: 18px 18px 6px; }
+    .buy { padding: 12px 18px 16px; }
+    h1 { font-size: 20px; }
+    .hint { bottom: 8px; }
+  }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<main id="stage">
+  <div class="brand">STRIDE ONE</div>
+  <div class="bag" id="bag" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+    Bag <span class="count" id="bagCount">0</span>
+  </div>
+  <div class="hint">Drag to look around · scroll or pinch to zoom</div>
+  <div id="fallback">The 3D view could not start. Check your internet connection (Three.js loads from unpkg.com) and reload.</div>
+</main>
+
+<aside>
+  <div class="scroll">
+    <h1>Stride One Runner</h1>
+    <p class="sub">Make it yours. Every choice updates the shoe and the price.</p>
+
+    <fieldset>
+      <legend>Upper <span id="upperName"></span></legend>
+      <div class="swatches" id="upperSwatches"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Sole <span id="soleName"></span></legend>
+      <div class="swatches" id="soleSwatches"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Laces <span id="lacesName"></span></legend>
+      <div class="swatches" id="lacesSwatches"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Material</legend>
+      <div class="seg" id="materialSeg">
+        <button type="button" data-material="mesh"><b>Mesh</b><small>Light and breathable · included</small></button>
+        <button type="button" data-material="leather"><b>Leather</b><small>Smooth and structured · +$30</small></button>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Heel initials <span>+$12</span></legend>
+      <input type="text" id="initials" maxlength="3" placeholder="Up to 3 letters" autocomplete="off" aria-label="Initials on the heel" />
+    </fieldset>
+    <label class="toggle"><input type="checkbox" id="spin" checked /> Rotate turntable</label>
+
+    <div class="summary" id="summary" style="margin-top:18px"></div>
+  </div>
+  <div class="buy">
+    <div class="price-row"><span>Total</span><div id="price">$0</div></div>
+    <button id="add" type="button">Add to bag</button>
+  </div>
+</aside>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+/* ---------- Options and prices ---------- */
+const BASE_PRICE = 140;
+const OPTIONS = {
+  upper: [
+    { name: 'Cloud white', hex: '#f2f2ee', price: 0 },
+    { name: 'Onyx', hex: '#1d1f23', price: 0 },
+    { name: 'Ember red', hex: '#d8352a', price: 5 },
+    { name: 'Tidal blue', hex: '#2b62d9', price: 5 },
+    { name: 'Volt', hex: '#c8f03c', price: 10 },
+    { name: 'Dusk violet', hex: '#7a4fd6', price: 10 },
+  ],
+  sole: [
+    { name: 'White', hex: '#f5f5f2', price: 0 },
+    { name: 'Black', hex: '#202225', price: 0 },
+    { name: 'Gum', hex: '#b9864f', price: 8 },
+    { name: 'Coral', hex: '#ff6b5e', price: 8 },
+    { name: 'Ice', hex: '#bfe3f2', price: 8 },
+  ],
+  laces: [
+    { name: 'White', hex: '#fafafa', price: 0 },
+    { name: 'Black', hex: '#17181a', price: 0 },
+    { name: 'Volt', hex: '#d4f53c', price: 4 },
+    { name: 'Coral', hex: '#ff6b5e', price: 4 },
+    { name: 'Sky', hex: '#5fb6ff', price: 4 },
+  ],
+};
+const MATERIAL_PRICE = { mesh: 0, leather: 30 };
+const INITIALS_PRICE = 12;
+const state = { upper: 0, sole: 0, laces: 1, material: 'mesh', initials: '' };
+
+/* ---------- Scene ---------- */
+const stage = document.getElementById('stage');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+} catch (e) {
+  document.getElementById('fallback').style.display = 'grid';
+  throw e;
+}
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+stage.prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+camera.position.set(4.6, 2.5, 5.2);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 0.62, 0);
+controls.enableDamping = true;
+controls.enablePan = false;
+controls.minDistance = 4;
+controls.maxDistance = 11;
+controls.minPolarAngle = 0.25;
+controls.maxPolarAngle = Math.PI / 2 - 0.04;
+
+// Studio lighting: soft key with shadows, cool fill, warm rim.
+scene.add(new THREE.HemisphereLight(0xffffff, 0xcfd3da, 0.55));
+const key = new THREE.DirectionalLight(0xffffff, 2.4);
+key.position.set(3.5, 6.5, 3);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.camera.left = -4; key.shadow.camera.right = 4;
+key.shadow.camera.top = 4; key.shadow.camera.bottom = -4;
+key.shadow.camera.near = 1; key.shadow.camera.far = 16;
+key.shadow.radius = 7; key.shadow.bias = -0.0004; key.shadow.normalBias = 0.02;
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xdfe8ff, 0.7); fill.position.set(-5, 3, 2); scene.add(fill);
+const rim = new THREE.DirectionalLight(0xfff1e0, 1.1); rim.position.set(-2, 4, -6); scene.add(rim);
+
+// Floor that only shows the shadow, so the page gradient is the backdrop.
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.ShadowMaterial({ opacity: 0.16 }));
+floor.rotation.x = -Math.PI / 2; floor.position.y = -0.14; floor.receiveShadow = true;
+scene.add(floor);
+
+/* ---------- Turntable ---------- */
+const table = new THREE.Group(); scene.add(table);
+const disc = new THREE.Mesh(
+  new THREE.CylinderGeometry(2.25, 2.3, 0.14, 96),
+  new THREE.MeshPhysicalMaterial({ color: 0xf3f4f6, roughness: 0.35, metalness: 0.0, clearcoat: 0.6, clearcoatRoughness: 0.25 })
+);
+disc.position.y = -0.07; disc.receiveShadow = true; disc.castShadow = true; table.add(disc);
+const ring = new THREE.Mesh(new THREE.TorusGeometry(2.05, 0.012, 8, 128), new THREE.MeshStandardMaterial({ color: 0xc9ccd2, roughness: 0.4, metalness: 0.6 }));
+ring.rotation.x = Math.PI / 2; ring.position.y = 0.004; table.add(ring);
+
+/* ---------- Shoe shape functions (t runs 0 at the heel to 1 at the toe) ---------- */
+const L = 3.0, HEEL_R = 0.42, TOE_R = 0.75;
+const smooth = (a, b, x) => { const k = Math.min(1, Math.max(0, (x - a) / (b - a))); return k * k * (3 - 2 * k); };
+const xAt = t => (t - 0.5) * L;
+function halfWidth(t) {
+  const d = t * L, dToe = (1 - t) * L;
+  if (d < HEEL_R) return Math.sqrt(Math.max(0, HEEL_R * HEEL_R - (HEEL_R - d) ** 2));
+  let w = HEEL_R - 0.03 * Math.sin(Math.PI * smooth(0.14, 0.5, t)) + 0.11 * smooth(0.38, 0.72, t);
+  if (dToe < TOE_R) w *= Math.sqrt(Math.max(0, 1 - ((TOE_R - dToe) / TOE_R) ** 2));
+  return w;
+}
+const lift = t => 0.16 * smooth(0.68, 1, t) ** 1.6;                 // toe spring
+const thick = t => 0.36 - 0.17 * smooth(0.05, 0.85, t);             // sole wedge
+const soleTop = t => lift(t) + thick(t);
+const HKEYS = [[0, .78], [.1, .82], [.22, .72], [.36, .9], [.5, .7], [.7, .5], [.88, .37], [1, .22]];
+function height(t) {
+  for (let i = 0; i < HKEYS.length - 1; i++) {
+    const [a, ha] = HKEYS[i], [b, hb] = HKEYS[i + 1];
+    if (t <= b) { const k = (1 - Math.cos(Math.PI * (t - a) / (b - a))) / 2; return ha + (hb - ha) * k; }
+  }
+  return HKEYS[HKEYS.length - 1][1];
+}
+// Point on the upper surface. zf is -1..1 across the shoe.
+function surf(t, zf, out = 0) {
+  const c = Math.abs(zf) ** (1 / 0.8), s = Math.sqrt(Math.max(0, 1 - c * c));
+  return new THREE.Vector3(xAt(t), soleTop(t) - 0.03 + (height(t) + out) * s ** 0.6, zf * halfWidth(t));
+}
+
+/* ---------- Procedural textures ---------- */
+function meshTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, 64, 64);
+  g.fillStyle = '#8b8b8b';
+  for (const [x, y] of [[16, 16], [48, 48]]) { g.beginPath(); g.ellipse(x, y, 11, 8, 0, 0, Math.PI * 2); g.fill(); }
+  g.fillStyle = '#b9b9b9';
+  for (const [x, y] of [[48, 16], [16, 48]]) { g.beginPath(); g.ellipse(x, y, 5, 4, 0, 0, Math.PI * 2); g.fill(); }
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(46, 22);
+  t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+}
+function leatherTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const g = c.getContext('2d'); g.fillStyle = '#808080'; g.fillRect(0, 0, 256, 256);
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 2600; i++) {
+    const v = 90 + rnd() * 80 | 0; g.fillStyle = `rgba(${v},${v},${v},.5)`;
+    g.beginPath(); g.ellipse(rnd() * 256, rnd() * 256, 1 + rnd() * 4, 1 + rnd() * 3, rnd() * 3, 0, Math.PI * 2); g.fill();
+  }
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(7, 4); return t;
+}
+const TEX = { mesh: meshTexture(), leather: leatherTexture() };
+
+/* ---------- Materials ---------- */
+const upperMat = new THREE.MeshPhysicalMaterial({ vertexColors: true });
+const soleMat = new THREE.MeshPhysicalMaterial({ roughness: 0.55, clearcoat: 0.25, clearcoatRoughness: 0.5 });
+const outsoleMat = new THREE.MeshStandardMaterial({ color: 0x1b1c1f, roughness: 0.9 });
+const laceMat = new THREE.MeshStandardMaterial({ roughness: 0.85 });
+const trimMat = new THREE.MeshStandardMaterial({ roughness: 0.6 });
+
+/* ---------- Build the shoe ---------- */
+const shoe = new THREE.Group(); shoe.position.y = 0.05; table.add(shoe);
+const add = (geo, mat) => { const m = new THREE.Mesh(geo, mat); m.castShadow = m.receiveShadow = true; shoe.add(m); return m; };
+
+// Sole: extruded footprint, then reshaped into a wedge with toe spring.
+function soleGeometry(grow, y0, h) {
+  const pts = [], N = 90;
+  for (let i = 0; i <= N; i++) { const t = i / N; pts.push(new THREE.Vector2(xAt(t) * (1 + grow * 0.35), halfWidth(t) * (1 + grow) + grow * 0.3)); }
+  for (let i = N - 1; i > 0; i--) { const t = i / N; pts.push(new THREE.Vector2(xAt(t) * (1 + grow * 0.35), -(halfWidth(t) * (1 + grow) + grow * 0.3))); }
+  const geo = new THREE.ExtrudeGeometry(new THREE.Shape(pts), { depth: 1, steps: 6, bevelEnabled: true, bevelSize: 0.035, bevelThickness: 0.06, bevelSegments: 4 });
+  geo.rotateX(-Math.PI / 2);
+  const p = geo.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const t = Math.min(1, Math.max(0, p.getX(i) / L + 0.5));
+    const yn = (p.getY(i) + 0.06) / 1.12;
+    p.setY(i, lift(t) + y0 + yn * (h ?? thick(t)));
+  }
+  geo.computeVertexNormals(); return geo;
+}
+add(soleGeometry(0.07, 0, null), soleMat);
+add(soleGeometry(0.05, -0.045, 0.07), outsoleMat);
+
+// Upper: lofted cross-sections, with the ankle opening pressed in and darkened.
+(function buildUpper() {
+  const N = 110, M = 56, pos = [], uv = [], col = [], idx = [];
+  for (let i = 0; i <= N; i++) {
+    const t = i / N, w = halfWidth(t), h = height(t), base = soleTop(t) - 0.03;
+    const open = Math.abs(t - 0.2) < 0.135 ? 0.27 * Math.sqrt(1 - ((t - 0.2) / 0.135) ** 2) : 0;
+    for (let j = 0; j <= M; j++) {
+      const a = Math.PI * j / M, c = Math.cos(a), s = Math.sin(a);
+      let z = w * Math.sign(c) * Math.abs(c) ** 0.8, y = base + h * s ** 0.6, shade = 1;
+      if (open > 0 && Math.abs(z) < open) {
+        const k = 1 - Math.abs(z) / open;
+        y -= 0.3 * Math.min(1, k * 5); shade = k > 0.12 ? 0.05 : 0.5;
+      }
+      pos.push(xAt(t), y, z); uv.push(t, j / M); col.push(shade, shade, shade);
+    }
+  }
+  for (let i = 0; i < N; i++) for (let j = 0; j < M; j++) {
+    const a = i * (M + 1) + j, b = a + M + 1;
+    idx.push(a, a + 1, b, b, a + 1, b + 1);
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  geo.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+  geo.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+  geo.setIndex(idx); geo.computeVertexNormals();
+  upperMat.side = THREE.DoubleSide;
+  add(geo, upperMat);
+})();
+
+// Padded collar around the ankle opening, and a toe bumper in the trim colour.
+(function buildTrim() {
+  const pts = [];
+  for (let i = 0; i < 40; i++) {
+    const a = i / 40 * Math.PI * 2, t = 0.2 + 0.135 * Math.cos(a), zf = Math.sin(a) * 0.27 / Math.max(0.01, halfWidth(t));
+    pts.push(surf(t, Math.max(-0.95, Math.min(0.95, zf)), 0.005));
+  }
+  add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, true), 120, 0.045, 10, true), trimMat);
+  const toe = [];
+  for (let i = 0; i <= 24; i++) { const zf = -0.97 + 1.94 * i / 24; toe.push(surf(0.9 - 0.11 * (zf * zf), zf * 0.999, 0.004)); }
+  const band = add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(toe), 80, 0.03, 8, false), soleMat);
+  band.scale.y = 1;
+})();
+
+// Laces: six bars across the instep with criss-crosses and eyelets.
+(function buildLaces() {
+  const rows = [0.4, 0.45, 0.5, 0.55, 0.6, 0.65], Z = 0.4;
+  const tube = (a, mid, b, r) => add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([a, mid, b]), 20, r, 8, false), laceMat);
+  const eyeGeo = new THREE.TorusGeometry(0.03, 0.012, 8, 16);
+  rows.forEach((t, i) => {
+    tube(surf(t, -Z, 0.012), surf(t, 0, 0.05), surf(t, Z, 0.012), 0.022);
+    for (const s of [-1, 1]) {
+      const e = add(eyeGeo, trimMat); e.position.copy(surf(t, s * Z, 0.008)); e.rotation.x = Math.PI / 2 - s * 0.5;
+    }
+    if (i < rows.length - 1) {
+      const n = rows[i + 1], m = (t + n) / 2;
+      tube(surf(t, -Z, 0.012), surf(m, 0, 0.085), surf(n, Z, 0.012), 0.018);
+      tube(surf(t, Z, 0.012), surf(m, 0, 0.07), surf(n, -Z, 0.012), 0.018);
+    }
+  });
+  // Bow at the top row.
+  for (const s of [-1, 1]) {
+    const a = surf(0.385, 0, 0.06), b = surf(0.36, s * 0.42, 0.1), c = surf(0.4, s * 0.5, 0.03);
+    add(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([a, b, c, a], false), 30, 0.017, 8, false), laceMat);
+  }
+})();
+
+// Heel initials: text drawn on a canvas, wrapped around the heel.
+const initialsCanvas = document.createElement('canvas'); initialsCanvas.width = 512; initialsCanvas.height = 256;
+const initialsTex = new THREE.CanvasTexture(initialsCanvas); initialsTex.colorSpace = THREE.SRGBColorSpace; initialsTex.anisotropy = 8;
+const heelArc = 1.7;
+const initialsMesh = new THREE.Mesh(
+  new THREE.CylinderGeometry(HEEL_R + 0.004, HEEL_R + 0.014, 0.4, 48, 1, true, Math.PI * 1.5 - heelArc / 2, heelArc),
+  new THREE.MeshStandardMaterial({ map: initialsTex, transparent: true, roughness: 0.6, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 })
+);
+initialsMesh.position.set(xAt(0) + HEEL_R, soleTop(0) + 0.33, 0);
+shoe.add(initialsMesh);
+
+function drawInitials() {
+  const g = initialsCanvas.getContext('2d');
+  g.clearRect(0, 0, 512, 256);
+  if (state.initials) {
+    const c = new THREE.Color(OPTIONS.upper[state.upper].hex);
+    const lum = 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
+    g.font = '700 150px system-ui, -apple-system, "Segoe UI", sans-serif';
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillStyle = lum > 0.35 ? '#17181a' : '#ffffff';
+    g.fillText(state.initials, 256, 134, 440);
+  }
+  initialsTex.needsUpdate = true;
+  initialsMesh.visible = !!state.initials;
+}
+
+/* ---------- Apply the configuration ---------- */
+const colourTargets = { upper: new THREE.Color(), sole: new THREE.Color(), laces: new THREE.Color(), trim: new THREE.Color() };
+function applyState(instant = false) {
+  colourTargets.upper.set(OPTIONS.upper[state.upper].hex);
+  colourTargets.sole.set(OPTIONS.sole[state.sole].hex);
+  colourTargets.laces.set(OPTIONS.laces[state.laces].hex);
+  colourTargets.trim.copy(colourTargets.upper).multiplyScalar(0.62);
+  if (instant) { upperMat.color.copy(colourTargets.upper); soleMat.color.copy(colourTargets.sole); laceMat.color.copy(colourTargets.laces); trimMat.color.copy(colourTargets.trim); }
+
+  if (state.material === 'mesh') {
+    Object.assign(upperMat, { map: TEX.mesh, bumpMap: TEX.mesh, bumpScale: 1.6, roughness: 0.95, clearcoat: 0, sheen: 0.6, sheenRoughness: 0.8 });
+  } else {
+    Object.assign(upperMat, { map: null, bumpMap: TEX.leather, bumpScale: 0.5, roughness: 0.42, clearcoat: 0.45, clearcoatRoughness: 0.35, sheen: 0 });
+  }
+  upperMat.needsUpdate = true;
+  drawInitials();
+  renderPanel();
+}
+
+/* ---------- Panel ---------- */
+const $ = id => document.getElementById(id);
+const fmt = n => '$' + n.toFixed(0);
+function total() {
+  return BASE_PRICE + OPTIONS.upper[state.upper].price + OPTIONS.sole[state.sole].price + OPTIONS.laces[state.laces].price
+    + MATERIAL_PRICE[state.material] + (state.initials ? INITIALS_PRICE : 0);
+}
+let shownPrice = 0, priceAnim = null;
+function tweenPrice(to) {
+  cancelAnimationFrame(priceAnim);
+  const from = shownPrice, t0 = performance.now();
+  const step = now => {
+    const k = Math.min(1, (now - t0) / 350), e = 1 - (1 - k) ** 3;
+    shownPrice = from + (to - from) * e; $('price').textContent = fmt(Math.round(shownPrice));
+    if (k < 1) priceAnim = requestAnimationFrame(step); else shownPrice = to;
+  };
+  priceAnim = requestAnimationFrame(step);
+  $('price').dataset.value = to;
+}
+function renderPanel() {
+  for (const part of ['upper', 'sole', 'laces']) {
+    const o = OPTIONS[part][state[part]];
+    $(part + 'Name').textContent = o.name + (o.price ? ` · +$${o.price}` : '');
+    [...$(part + 'Swatches').children].forEach((b, i) => b.setAttribute('aria-pressed', i === state[part]));
+  }
+  [...$('materialSeg').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.material === state.material));
+  const rows = [['Stride One Runner', BASE_PRICE]];
+  for (const part of ['upper', 'sole', 'laces']) { const o = OPTIONS[part][state[part]]; if (o.price) rows.push([`${o.name} ${part}`, o.price]); }
+  if (state.material === 'leather') rows.push(['Leather upper', MATERIAL_PRICE.leather]);
+  if (state.initials) rows.push([`Initials "${state.initials}"`, INITIALS_PRICE]);
+  $('summary').replaceChildren(...rows.map(([label, p], i) => {
+    const d = document.createElement('div'), a = document.createElement('span'), b = document.createElement('span');
+    a.textContent = label; b.textContent = (i ? '+' : '') + fmt(p); d.append(a, b); return d;
+  }));
+  tweenPrice(total());
+}
+for (const part of ['upper', 'sole', 'laces']) {
+  OPTIONS[part].forEach((o, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'swatch'; b.style.background = o.hex;
+    b.title = o.name + (o.price ? ` (+$${o.price})` : ''); b.setAttribute('aria-label', `${part} colour: ${b.title}`);
+    b.addEventListener('click', () => { state[part] = i; applyState(); });
+    $(part + 'Swatches').append(b);
+  });
+}
+$('materialSeg').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  state.material = b.dataset.material; applyState();
+});
+$('initials').addEventListener('input', e => {
+  state.initials = e.target.value.replace(/[^a-z0-9]/gi, '').slice(0, 3).toUpperCase();
+  e.target.value = state.initials; applyState();
+});
+
+/* ---------- Add to bag ---------- */
+let bagCount = 0, hop = null;
+$('add').addEventListener('click', () => {
+  if (hop) return;
+  hop = { t0: performance.now() };
+  const btn = $('add'); btn.textContent = 'Added to bag ✓'; btn.classList.add('done');
+  setTimeout(() => {
+    $('bagCount').textContent = ++bagCount; $('bag').classList.add('bump');
+    setTimeout(() => $('bag').classList.remove('bump'), 260);
+  }, 700);
+  setTimeout(() => { btn.textContent = 'Add to bag'; btn.classList.remove('done'); }, 1900);
+});
+
+/* ---------- Render loop ---------- */
+function resize() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.fov = w / h < 1 ? 46 : 32;
+  camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(stage); resize();
+
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), 0.05), now = performance.now();
+  if ($('spin').checked) table.rotation.y += dt * 0.35;
+
+  const k = 1 - Math.exp(-dt * 9);
+  upperMat.color.lerp(colourTargets.upper, k); soleMat.color.lerp(colourTargets.sole, k);
+  laceMat.color.lerp(colourTargets.laces, k); trimMat.color.lerp(colourTargets.trim, k);
+
+  if (hop) {
+    const p = Math.min(1, (now - hop.t0) / 1150), e = p < 0.5 ? 4 * p * p * p : 1 - (-2 * p + 2) ** 3 / 2;
+    shoe.position.y = 0.05 + Math.sin(Math.PI * p) * 1.0;
+    shoe.rotation.y = e * Math.PI * 2;
+    shoe.rotation.z = Math.sin(Math.PI * p) * -0.22;
+    const land = p > 0.86 ? Math.sin((p - 0.86) / 0.14 * Math.PI) : 0;
+    shoe.scale.set(1 + land * 0.06, 1 - land * 0.1, 1 + land * 0.06);
+    if (p >= 1) { hop = null; shoe.position.y = 0.05; shoe.rotation.set(0, 0, 0); shoe.scale.setScalar(1); }
+  }
+  controls.update();
+  renderer.render(scene, camera);
+});
+
+applyState(true);
+window.__configurator = { state, total, table, shoe, camera, controls };
+</script>
+</body>
+</html>
