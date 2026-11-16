@@ -1,6 +1,6 @@
 # DESIGN.md
 
-One design system for the BDDigital site. The brand decides colours and
+One design system for the BDdigital site. The brand decides colours and
 fonts. The reference sites decide layout and feel. Every visual choice on the
 site must trace back to this file.
 

@@ -7,7 +7,7 @@ this file, it does not go on the site.
 ## The business
 
 - A digital marketing ad agency.
-- Name: BDDigital.
+- Name: BDdigital.
 - Run by Brandon Duque.
 - Sells services to other businesses (B2B), not to consumers.
 
